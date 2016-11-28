@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using BookStore.Models;
 using System.Linq.Expressions;
 using BookStore.DTOs;
+using System.Web.Http.Cors;
 
 namespace BookStore.Controllers
 {
@@ -37,6 +38,12 @@ namespace BookStore.Controllers
         }
 
         // GET api/Books/5
+        [EnableCors("http://localhost", // Origin
+              null,                     // Request headers
+              "GET",                    // HTTP methods
+              "bar",                    // Response headers
+              SupportsCredentials = true  // Allow credentials
+        )]
         [Route("{id:int}")]
         [ResponseType(typeof(BookDto))]
         public async Task<IHttpActionResult> GetBook(int id)
